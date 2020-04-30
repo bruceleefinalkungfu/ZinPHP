@@ -1,6 +1,6 @@
 <?php
 
-class default_app {
+class DefaultApp {
 	
 	public function default_method() {
 		return "Default app default method";
