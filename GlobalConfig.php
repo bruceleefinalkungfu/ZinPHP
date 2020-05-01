@@ -1,7 +1,8 @@
 <?php
 class GlobalConfig {
 	public static $conf_allowed_app_names_arr = array(
-				"zin_game_card_jackace" => "jack, jackace, card_jack, j_ace, ace_jack, z_g_c_j_a, jace"
+				"ZinGameCardJackAce" => "zingamecardjackace, zin_game_card_jackace, jack, jackace, card_jack, j_ace, ace_jack, z_g_c_j_a, jace",
+				"DatabaseConnection" => "databaseconnection, db, database"
 			);
 	public static $conf_allowed_method_names_arr = array(
 				"get" => "get, find, need, fetch",
@@ -10,6 +11,6 @@ class GlobalConfig {
 				"delete" => "delete, remove, del, erase"
 			);
 	public static $debug_types = array(
-		"", "query", "verbose", "all"
+		"", "query", "verbose", "method", "all"
 	);
 }

@@ -35,7 +35,7 @@ class CommonUtil {
 	}
 	public static function debug($msg, $debugType) {
 		if(self::isDebugEnabled( $debugType)) {
-			echo $msg.'</br>';
+			echo '( '.($debugType == ''? 'default' : $debugType).' )     '.$msg.'</br>';
 		}
 	}
 	public static function d($msg) {
