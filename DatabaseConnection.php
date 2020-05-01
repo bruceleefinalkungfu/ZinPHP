@@ -51,9 +51,12 @@ class DatabaseConnection {
 		    throw new Exception("No table query parameter is sent in query string");
 	}
 	public function getSelectSql() {
+		return $this->getSelectOrDeleteSql("SELECT * ");
+	}
+	public function getSelectOrDeleteSql($selectOrDelete) {
 		$tableName = $this->getTableName();
 		$this->validateTable($tableName);
-		$sql = "SELECT * FROM `".$tableName."` ";
+		$sql = $selectOrDelete." FROM `".$tableName."` ";
 		return $this->addWhereClauseToQuery($sql);
 	}
 	
@@ -164,10 +167,14 @@ class DatabaseConnection {
 		}
 	}
 	public function get() {
-		$sql = $this->getSelectSql();
+		$sql = $this->getSelectOrDeleteSql("SELECT * ");
 		$statement = $this->executeSelectQuery($sql);
 		$result = $statement->fetchAll();
 		return $this->remove0123etcFromResult($result);
+	}
+	public function delete() {
+		$sql = $this->getSelectOrDeleteSql("DELETE ");
+		return $this->executeSelectQuery($sql);
 	}
 	public function create() {
 		$jsonData = file_get_contents("php://input");

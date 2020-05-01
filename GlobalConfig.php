@@ -5,10 +5,10 @@ class GlobalConfig {
 				"DatabaseConnection" => "databaseconnection, db, database"
 			);
 	public static $conf_allowed_method_names_arr = array(
-				"get" => "get, find, need, fetch",
+				"get" => "get, find, fetch",
 				"create" => "create, insert, add",
 				"update" => "update, modify, change",
-				"delete" => "delete, remove, del, erase"
+				"remove" => "delete, remove, del, erase"
 			);
 	public static $debug_types = array(
 		"", "query", "verbose", "method", "all"
