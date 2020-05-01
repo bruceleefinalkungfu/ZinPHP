@@ -157,7 +157,7 @@ class DatabaseConnection {
 			}
 		}
 	}
-	public function bindParamForUpdate($statement, $obj) {
+	public function bindParamForUpdateOrInsert($statement, $obj) {
 		$this->bindParam($statement);
 		foreach(array_keys($obj) as $k) {
 			$statement->bindParam(':'.$k, $obj[$k]);
@@ -203,16 +203,9 @@ class DatabaseConnection {
 		CommonUtil::debug($sql, "query");
 		$con = $this->connectionFromConfigPHPFile();
 		$statement = $con->prepare($sql);
-		$this->bindParamForUpdate($statement, $obj);
-		if($this->isInsertQuery($sql)) {
-			return $statement->execute($obj);
-		} else {
-			# Either pass the object inside execute or bind the parameters but not both.
-			return $statement->execute();
-		}
-	}
-	function isInsertQuery($sql) {
-		return strtolower(substr( trim($sql), 0, 6)) == 'insert';
+		$this->bindParamForUpdateOrInsert($statement, $obj);
+		# Either call execute($obj), obj inside execute or bind the parameters but not both.
+		return $statement->execute();
 	}
 	public function validateTable($tableName) {
 		if( ! in_array($tableName, DBConfig::$allowed_table_names)) {
