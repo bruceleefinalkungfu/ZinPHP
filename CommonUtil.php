@@ -1,5 +1,7 @@
 <?php
 
+require_once("GlobalConfig.php");
+
 class CommonUtil {
 	
 	public static function generate_value_key_arr_from_key_value($method_syn_arr) {
@@ -21,14 +23,29 @@ class CommonUtil {
 	}
 	
 	public static function isDebugEnabled( $debugType) {
-		return array_key_exists( $debugType.'debug', $_GET);
+		return 
+		array_key_exists('debug_all', $_GET) || array_key_exists('all_debug', $_GET)
+		|| array_key_exists('debug-all', $_GET) || array_key_exists('all-debug', $_GET)
+		|| array_key_exists('debugall', $_GET) || array_key_exists('alldebug', $_GET)
+		# Doesn't matter if you use query_debug or debug_query or querydebug or debugquery
+		# or debug-query or query-debug, it will log the msg
+		|| array_key_exists( $debugType.'_debug', $_GET) || array_key_exists( 'debug_'.$debugType, $_GET)
+		|| array_key_exists( $debugType.'-debug', $_GET) || array_key_exists( 'debug-'.$debugType, $_GET)
+		|| array_key_exists( $debugType.'debug', $_GET) || array_key_exists( 'debug'.$debugType, $_GET);
 	}
 	public static function debug($msg, $debugType) {
 		if(self::isDebugEnabled( $debugType)) {
-			echo $msg.'-----------</br>';
+			echo $msg.'</br>';
 		}
 	}
 	public static function d($msg) {
 		self::debug($msg, '');
+	}
+	public static function isAnyDebugEnabled() {
+		foreach(GlobalConfig::$debug_types as $debg) {
+			if(self::isDebugEnabled($debg))
+				return true;
+		}
+		return false;
 	}
 }

@@ -15,6 +15,7 @@ class ResolveMethod {
 		} else {
 		    CommonUtil::d("No such method ".$method." exists. Existing methods are "
 		    .implode(", ", array_keys($this->method_syn_arr_reverse)));
+			return $method;
 		}
 	}
 	

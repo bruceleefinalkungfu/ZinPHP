@@ -9,4 +9,7 @@ class GlobalConfig {
 				"update" => "update, modify, change",
 				"delete" => "delete, remove, del, erase"
 			);
+	public static $debug_types = array(
+		"", "query", "verbose", "all"
+	);
 }
