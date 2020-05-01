@@ -8,7 +8,7 @@ class GlobalConfig {
 				"get" => "get, find, fetch",
 				"create" => "create, insert, add",
 				"update" => "update, modify, change",
-				"remove" => "delete, remove, del, erase"
+				"delete" => "delete, remove, del, erase"
 			);
 	public static $debug_types = array(
 		"", "query", "verbose", "method", "all"
