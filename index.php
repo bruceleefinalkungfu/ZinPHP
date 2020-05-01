@@ -5,6 +5,7 @@ require_once("ResolveMethod.php");
 require_once("ResolveApp.php");
 require_once("DefaultApp.php");
 require_once("ResponseUtil.php");
+require_once("ztemp.php");
 
 try {
 	$resolve_method_obj = new ResolveMethod();

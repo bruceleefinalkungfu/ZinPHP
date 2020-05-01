@@ -3,7 +3,7 @@
 class CommonUtil {
 	
 	public static function generate_value_key_arr_from_key_value($method_syn_arr) {
-		$method_syn_arr_reverse = array();			
+		$method_syn_arr_reverse = array();	
 		$method_syn_arr_keys = array_keys($method_syn_arr);
 		$method_syn_arr_size = count($method_syn_arr);
 		for( $i=0; $i < $method_syn_arr_size; $i++ ) {
@@ -20,4 +20,15 @@ class CommonUtil {
 		return $method_syn_arr_reverse;
 	}
 	
+	public static function isDebugEnabled( $debugType) {
+		return array_key_exists( $debugType.'debug', $_GET);
+	}
+	public static function debug($msg, $debugType) {
+		if(self::isDebugEnabled( $debugType)) {
+			echo $msg.'-----------</br>';
+		}
+	}
+	public static function d($msg) {
+		self::debug($msg, '');
+	}
 }

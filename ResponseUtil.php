@@ -4,15 +4,15 @@ class ResponseUtil {
 			
 	public static function success($data)
 	{
-		ResponseUtil::response(200, "Success", $data);
+		self::response(200, "Success", $data);
 	}		
 	public static function error($data)
 	{
-		ResponseUtil::response(500, "Error", $data);
+		self::response(500, "Failed", $data);
 	}		
 	public static function caught($e)
 	{
-		ResponseUtil::error(array(
+		self::response(1234, "ExceptionError", array(
 		"line"=>$e->getLine(),
 		"file"=>$e->getFile(),
 		"message"=>$e->getMessage()
