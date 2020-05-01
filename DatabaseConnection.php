@@ -1,5 +1,5 @@
 <?php
-require "DBConfig.php";
+require_once("DBConfig.php");
 
 class DatabaseConnection {
 	# Create a singleton to store the connection for reuse
@@ -41,14 +41,14 @@ class DatabaseConnection {
 	
 	public function getSelectSql($tableName) {
 		$this->validateTable($tableName);
-		$sql = "SELECT * FROM ".$tableName." ";
+		$sql = "SELECT * FROM `".$tableName."` ";
 		return $sql;
 	}
 	
 	public function getInsertSql($tableName, $associativeArray) {
 		$this->validateTable($tableName);
 		validateColumnArray(array_keys($associativeArray));
-		$sql = sprintf("Insert into ".$tableName." (%s) values (%s)",
+		$sql = sprintf("Insert into `".$tableName."` (%s) values (%s)",
 			implode(", ", array_keys($associativeArray)),
 			":" . implode(", :", array_keys($associativeArray))
 		);
@@ -57,7 +57,7 @@ class DatabaseConnection {
 	
 	public function get($tableName) {
 		$sql = $this->getSelectSql($tableName);
-		$statement = executeQuery($sql);
+		$statement = $this->executeQuery($sql);
 		return $statement->fetchAll();
 	}
 	public function getWhereColumnValsAre($tableName, $columnNames, $columnVals) {
@@ -70,6 +70,7 @@ class DatabaseConnection {
 		$statement = $this->executeQueryPersistingObject($sql, $associativeArray);
 	}
 	public function executeQuery($sql) {
+	    $sql = $sql.";";
 		CommonUtil::debug($sql, "query");
 		$con = $this->connectionFromConfigPHPFile();
 		$statement = $con->prepare($sql);
@@ -77,6 +78,7 @@ class DatabaseConnection {
 		return $statement;
 	}
 	public function executeQueryPersistingObject($sql, $obj) {
+		$sql = $sql.";";
 		CommonUtil::debug($sql, "query");
 		$con = $this->connectionFromConfigPHPFile();
 		$statement = $con->prepare($sql);
@@ -84,12 +86,12 @@ class DatabaseConnection {
 		return $statement;
 	}
 	public function validateTable($tableName) {
-		if(in_array($tableName, DBConfig::$allowed_table_names)) {
+		if( ! in_array($tableName, DBConfig::$allowed_table_names)) {
 			throw new Exception("Table ".$tableName." doesn't exist or if it does. It's not accessible");
 		}
 	}
 	public function validateColumn($columnName) {
-		if(in_array($columnName, DBConfig::$allowed_column_names)) {
+		if( ! in_array($columnName, DBConfig::$allowed_column_names)) {
 			throw new Exception("Column ".$columnName." doesn't exist or if it does. It's not accessible");
 		}
 	}

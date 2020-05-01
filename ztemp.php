@@ -1,13 +1,13 @@
 <?php
 
-#To test some random things
 require_once("DatabaseConnection.php");
 
+#To test some random things
 class ztemp {
 
 	function get() {
 		$databaseConnection = new DatabaseConnection();
-		return $databaseConnection->get('zin-game-jackace-connect');
+		return $databaseConnection->get('zin-game-jackace-connection');
 	}
 	
 	function create() {
