@@ -79,7 +79,7 @@ class DatabaseConnection {
 		$sql = substr($sql, 0, -1);
 		return $this->addWhereClauseToQuery($sql);
 	}
-	function getColumnKey($i) {
+	public function getColumnKey($i) {
 		if(array_key_exists('c'.$i, $_GET))
 			return $_GET['c'.$i];
 		if(array_key_exists('col'.$i, $_GET))
@@ -88,7 +88,7 @@ class DatabaseConnection {
 			return $_GET['column'.$i];
 		return null;
 	}
-	function getColumnValue($i) {
+	public function getColumnValue($i) {
 		if(array_key_exists('v'.$i, $_GET))
 			return $_GET['v'.$i];
 		if(array_key_exists('val'.$i, $_GET))
@@ -98,7 +98,7 @@ class DatabaseConnection {
 		return null;
 	}
 	
-	function getColumnKeyAndColumnValue($i) {
+	public function getColumnKeyAndColumnValue($i) {
 		$col = $this->getColumnKey($i);
 		$val = $this->getColumnValue($i);
 		return array($col, $val);
