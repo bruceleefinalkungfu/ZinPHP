@@ -34,9 +34,11 @@ class CommonUtil {
 		|| array_key_exists( $debugType.'debug', $_GET) || array_key_exists( 'debug'.$debugType, $_GET);
 	}
 	public static function debug($msg, $debugType) {
+	    $logMsg = '( '.($debugType == ''? 'default' : $debugType).' )     '.$msg; 
 		if(self::isDebugEnabled( $debugType)) {
-			echo '( '.($debugType == ''? 'default' : $debugType).' )     '.$msg.'</br>';
+			echo $logMsg.'</br>';
 		}
+		error_log($logMsg);
 	}
 	public static function d($msg) {
 		self::debug($msg, '');

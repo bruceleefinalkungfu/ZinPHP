@@ -25,6 +25,7 @@ class ResponseUtil {
 		$response['data']=$data;
 		
 		$json_response = json_encode($response);
+		error_log('(Response)     '.$json_response);
 		echo $json_response;
 	}
 }

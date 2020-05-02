@@ -215,12 +215,12 @@ class DatabaseConnection {
 		return $statement->execute();
 	}
 	public function validateTable($tableName) {
-		if( ! in_array($tableName, DBConfig::$allowed_table_names)) {
+		if( ! in_array(strtolower($tableName), DBConfig::$allowed_table_names)) {
 			throw new Exception("Table ".$tableName." doesn't exist or if it does. It's not accessible. Change DBConfig.php");
 		}
 	}
 	public function validateColumn($columnName) {
-		if( ! in_array($columnName, DBConfig::$allowed_column_names)) {
+		if( ! in_array(strtolower($columnName), DBConfig::$allowed_column_names)) {
 			throw new Exception("Column ".$columnName." doesn't exist or if it does. It's not accessible. Change DBConfig.php");
 		}
 	}
