@@ -38,7 +38,8 @@ class CommonUtil {
 		if(self::isDebugEnabled( $debugType)) {
 			echo $logMsg.'</br>';
 		}
-		error_log($logMsg);
+		if(GlobalConfig::$isLogEnabled)
+			error_log($logMsg);
 	}
 	public static function d($msg) {
 		self::debug($msg, '');

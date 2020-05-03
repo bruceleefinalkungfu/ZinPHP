@@ -13,4 +13,5 @@ class GlobalConfig {
 	public static $debug_types = array(
 		"", "query", "verbose", "method", "all"
 	);
+	public static $isLogEnabled = false;
 }
