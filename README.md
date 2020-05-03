@@ -33,3 +33,9 @@ http:\\\\localhost:80?app=db&m=get&<b>table=tab-employee</b> It will fetch all t
 <b>5. column1 or col1 or c1</b> and <b>value1 or val1 or v1</b>
 
 http:\\\\localhost:80?app=db&m=get&table=tab-employee&<b>col1=name&val1=Anurag</b> It will fetch all the entries that have Anurg value in the name column
+
+
+#TODOLIST
+1. valnot1 or notval1 for not equal to in where clause
+2. Call.php
+3. Logs to file must have levels
